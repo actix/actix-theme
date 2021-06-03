@@ -1,0 +1,11 @@
+[package]
+name = "http1"
+version = "1.0.0"
+edition = "2018"
+
+[dependencies]
+actix-cors = "0.5"
+actix-service = "1"
+actix-http = { version = "2", features = ["openssl"] }
+actix-web = { version = "3", features = ["openssl"] }
+openssl = { version = "0.10", features = ["v110"] }

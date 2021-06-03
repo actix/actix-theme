@@ -8,6 +8,7 @@ members = [
   "extractors",
   "flexible-responders",
   "getting-started",
+  "http1",
   "http2",
   "main-example",
   "middleware",
