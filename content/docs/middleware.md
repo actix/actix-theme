@@ -126,6 +126,15 @@ into a response.
 
 {{< include-example example="middleware" file="errorhandler.rs" section="error-handler" >}}
 
+# Authorization
+
+[actix-casbin-auth](https://github.com/casbin-rs/actix-casbin-auth) middleware provides
+authorization based on access control models like ACL, RBAC, ABAC. Casbin doesn't
+provide authentication (who you are), so you need to implement an Authentication Middleware
+to identify a user.
+
+{{< include-example example="middleware" file="authorization.rs" section="authorization" >}}
+
 [sessionobj]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
 [requestsession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.Session.html
 [cookiesession]: https://docs.rs/actix-session/0.3.0/actix_session/struct.CookieSession.html
