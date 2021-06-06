@@ -1,10 +1,9 @@
 // <example>
-use actix_web::{http, HttpRequest, HttpResponse};
+use actix_web::{HttpRequest, HttpResponse};
 
 async fn index(req: HttpRequest) -> HttpResponse {
     HttpResponse::Ok()
-        .connection_type(http::ConnectionType::Close) // <- Close connection
-        .force_close() // <- Alternative method
+        .force_close() // <- Close connection
         .finish()
 }
 // </example>

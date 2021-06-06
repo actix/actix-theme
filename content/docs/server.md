@@ -118,13 +118,18 @@ Actix can wait for requests on a keep-alive connection.
 
 {{< include-example example="server" file="keep_alive.rs" section="keep-alive" >}}
 
-If the first option above is selected, then *keep alive* state is calculated based on the
-response's *connection-type*. By default `HttpResponse::connection_type` is not
-defined. In that case *keep alive* is defined by the request's HTTP version.
+If the first option above is selected, then *keep alive* state is calculated
+based on the response's [*connection-type*][httpconnectiontype]. By default no
+explicit connection type is defined for an HTTP response; in that case *keep alive*
+is determined based on the request's HTTP version:
 
 > *keep alive* is **off** for *HTTP/1.0* and is **on** for *HTTP/1.1* and *HTTP/2.0*.
 
-*Connection type* can be changed with `HttpResponseBuilder::connection_type()` method.
+The *connection type* can be changed with the following [`HttpResponseBuilder`][httpresponsebuilder] methods:
+
+- [`keep_alive()`][hrb-method-keep_alive] - Set connection type to KeepAlive
+- [`upgrade()`][hrb-method-upgrade] - Set connection type to Upgrade
+- [`force_close()`][hrb-method-force_close] - Force close connection, even if it is marked as keep-alive
 
 {{< include-example example="server" file="keep_alive_tp.rs" section="example" >}}
 
@@ -147,6 +152,11 @@ are available on unix systems.
 [`HttpServer::disable_signals()`][disablesignals] method.
 
 [server]: https://docs.rs/actix-web/3/actix_web/dev/struct.Server.html
+[httpconnectiontype]:     https://docs.rs/actix-web/3/actix_web/http/enum.ConnectionType.html
+[httpresponsebuilder]:    https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html
+[hrb-method-keep_alive]:  https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html#method.keep_alive
+[hrb-method-upgrade]:     https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html#method.upgrade
+[hrb-method-force_close]: https://docs.rs/actix-web/3/actix_web/dev/struct.HttpResponseBuilder.html#method.force_close
 [httpserverstruct]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html
 [bindmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind
 [bindopensslmethod]: https://docs.rs/actix-web/3/actix_web/struct.HttpServer.html#method.bind_openssl
